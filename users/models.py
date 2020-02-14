@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class AdditionalInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
+    email_confirmed = models.BooleanField(default=False)
 
 
 @receiver(post_save, sender=User)

@@ -125,10 +125,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = 'vitalikbidochka@gmail.com'
-EMAIL_HOST_PASSWORD = 'moloko2013'
+EMAIL_HOST_USER = 'newssite@sandbox2517dc64a782415286b5162cd77e8559.mailgun.org'
+EMAIL_HOST_PASSWORD = '2d9bf362bb8898b29e7bf4a47e303774-52b6835e-c89b56e3'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True

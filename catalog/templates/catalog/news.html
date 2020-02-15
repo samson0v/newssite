@@ -1,0 +1,35 @@
+{% extends 'catalog/wrapper.html' %}
+
+{% load static %}
+
+{% block title %}News | {{ news.title }}{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'catalog/news.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="center-layout">
+        <img src="{{ news.image.url }}" alt="">
+        <p class="news-title">{{ news.title }}</p>
+        <p class="news-desc">{{ news.description }}</p>
+        <div class="form-comment">
+            <form method="POST">
+                {% csrf_token %}
+                <p>Add comment:</p>
+                <input type="text" name="who" id="who" placeholder="Who">
+                <Textarea id="text" name="text" placeholder="Comment"></Textarea>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <div class="comment-block">
+            <p class="com">Comments:</p>
+            {% for comment in news.comment_set.all %}
+                <div class="comment">
+                    <p class="who">{{ comment.who }}</p>
+                    <p class="text">{{ comment.text }}</p>
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

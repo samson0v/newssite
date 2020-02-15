@@ -1,0 +1,27 @@
+{% extends 'catalog/wrapper.html' %}
+{% load static %}
+
+{% block title %}Add News{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'catalog/add_news.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p class="l">Add News</p>
+        <p class="place">Title</p>
+        {{ form.title }}
+        <p class="place">Description</p>
+        {{ form.description }}
+        <p class="place">Image</p>
+        {{ form.image }}
+        <button type="submit">OK</button>
+        <input type="text" id="user" name="user">
+    </form>
+    <script>
+        user = document.getElementById("user");
+        user.value = '{{ user.id }}';
+    </script>
+{% endblock %}

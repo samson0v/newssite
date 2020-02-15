@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="{% static 'catalog/wrapper.css' %}">
+    {% block link %}{% endblock %}
+</head>
+<body>
+    <header>
+        <p class="logo"><b>News Site</b></p>
+            {% if user.is_authenticated %}
+            <p class="username">{{ user.username }}, <a href="logout/">logout</a></p>
+            <a class="btn" href="{% url 'catalog:add-news' %}">
+                <div class="add-news">
+                    <p>+ Add news</p>
+                </div>
+            </a>
+            {% else %}
+                <a class="login" href="login/">Login</a>
+                <a class="signup" href="signup/">Sign Up</a>
+            {% endif %}
+    </header>
+    <div class="content">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>

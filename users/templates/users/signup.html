@@ -1,16 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'catalog/wrapper.html' %}
+
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'users/signup.css' %}">
+{% endblock %}
+
+{% block content %}
     <form method=POST>
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">reg</button>
+        <p class="sign">Sign Up</p>
+        <p class="place">First name</p>
+        {{ form.first_name }}
+        <p class="place">Last name</p>
+        {{ form.last_name }}
+        <p class="place">Username</p>
+        {{ form.username }}
+        <p class="place">Email</p>
+        {{ form.email }}
+        <p class="place">Password</p>
+        {{ form.password1 }}
+        <p class="place">Re password</p>
+        {{ form.password2 }}
+        <button type="submit">Sign Up</button>
+        <a class="have" href="/login/">Already have an account?</a>
     </form>
-    {{ user }}
-</body>
-</html>
+{% endblock %}

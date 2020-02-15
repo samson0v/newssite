@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import SignUpForm
 from django.contrib.auth.models import User
 
@@ -15,6 +15,7 @@ from django.utils.http import urlsafe_base64_decode
 import requests
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 
 def signup_view(request):
@@ -51,8 +52,8 @@ def signup_view(request):
                     "https://api.mailgun.net/v3/sandbox2517dc64a782415286b5162cd77e8559.mailgun.org/messages",
                     auth=("api", "9cee744c427a6cd7f2155af894c70e8d-52b6835e-83cc34f0"),
                     data={"from": "Mailgun Sandbox <newssite@sandbox2517dc64a782415286b5162cd77e8559.mailgun.org>",
-                        "to": "Vitalii Bidochka <" + email + ">",
-                        "subject": "Hello Vitalii Bidochka",
+                        "to": "<" + email + ">",
+                        "subject": "Welcome",
                         "html": html_content
                     },
                 )
@@ -88,8 +89,14 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return render(request, 'users/reg_finish.html')
+            return redirect('/')
         else:
             return render(request, 'users/account_activation_invalid.html')
 
     return render(request, 'users/login.html')
+
+
+def logout_view(request):
+    logout(request)
+
+    return redirect('/')

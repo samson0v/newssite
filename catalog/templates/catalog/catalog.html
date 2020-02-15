@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalog</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'catalog/wrapper.html' %}
+{% load static %}
+
+{% block title %}Catalog{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'catalog/catalog.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="center-layout">
+    {% for new in news_list %}
+        {% if new.moderated == True %}
+            <div class="block">
+                <img src="{{ new.image.url }}" alt="">
+                <p class="title">{{ new.title }}</p>
+                <p class="desc">{{ new.getDescription }}</p>
+                <a class="link" href="{{ new.id }}/">See more</a>
+            </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}
